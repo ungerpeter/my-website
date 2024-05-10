@@ -32,11 +32,11 @@ body {
   flex-grow: 1;
 }
 
-.sidebar nav li {
+.sidebar nav a {
   border-radius: var(--border-radius);
 }
 
-.sidebar nav li:hover {
+.sidebar nav a:hover, .sidebar nav a.active {
   background-color: var(--hover-bg-color);
 }
 

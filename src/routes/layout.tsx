@@ -2,9 +2,10 @@ import { component$, Slot, useStyles$ } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import type { RequestHandler } from "@builder.io/qwik-city";
 
-import { LuHome, LuFileText, LuPresentation } from "@qwikest/icons/lucide";
+import { LuHome, LuFileText, LuPresentation, LuNewspaper, LuMessageCircle } from "@qwikest/icons/lucide";
 
 import styles from "./styles.css?inline";
+import { NavLink } from "~/components/nav-link/nav-link";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -30,7 +31,7 @@ export default component$(() => {
       <aside class="sidebar">
         <header class="content-wrapper">
           <div class="avatar-wrapper">
-          <a href="#">
+          <a href="/">
             <img class="avatar" src="https://avatars.githubusercontent.com/u/4763039?v=4" width={150} height={150} alt="Peter Unger" />
           </a>
           </div>
@@ -40,13 +41,19 @@ export default component$(() => {
         <nav class="content-wrapper">
           <ul>
             <li>
-              <a href="#"><LuHome />Home</a>
+              <NavLink href="/"><LuHome />About me</NavLink>
             </li>
             <li>
-              <a href="#"><LuFileText />CV</a>
+              <NavLink href="/cv/"><LuFileText />My cv</NavLink>
             </li>
             <li>
-              <a href="#"><LuPresentation />Projects</a>
+              <NavLink href="/portfolio/"><LuPresentation />My portfolio</NavLink>
+            </li>
+            <li>
+              <NavLink href="/blog/"><LuNewspaper />My blog</NavLink>
+            </li>
+            <li>
+              <NavLink href="/contact/"><LuMessageCircle />Contact me</NavLink>
             </li>
           </ul>
         </nav>
