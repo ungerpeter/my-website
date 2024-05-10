@@ -96,3 +96,16 @@ h1 {
   border-radius: var(--border-radius);
   padding: 1rem;
 }
+
+article {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color-secondary);
+  padding: 1rem;
+}
+
+.blog-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
