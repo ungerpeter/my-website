@@ -3,7 +3,7 @@ import { css } from "~/styled-system/css";
 
 export interface SvgAvatarProps {}
 
-export const SvgAvatar = component$<SvgAvatarProps>((props) => {
+export const SvgAvatar = component$<SvgAvatarProps>(() => {
   return (
     <svg
       width="138.03658mm"
@@ -17,12 +17,24 @@ export const SvgAvatar = component$<SvgAvatarProps>((props) => {
         width: "100%",
         maxWidth: "250px",
         height: "auto",
-        "& path": {
-          stroke: "#fff",
-          strokeWidth: 0.5,
-        },
+        stroke: "#fff",
+        strokeWidth: 0.5,
         "& #glasses": {
           fillOpacity: 0.3,
+          strokeWidth: 1.5,
+          stroke: '#999',
+        },
+        "& #lips": {
+          strokeWidth: 0.3,
+          stroke: '#999',
+        },
+        "& #eye_accents": {
+          strokeWidth: 0.3,
+          stroke: '#999',
+        },
+        "& #head_accents": {
+          strokeWidth: 0.3,
+          stroke: '#999',
         }
       })}
     >
@@ -115,7 +127,7 @@ export const SvgAvatar = component$<SvgAvatarProps>((props) => {
           id="left_eyebrow"
         />
       </g>
-      <g id="forehead" transform="translate(-38.562516,-23.609584)">
+      <g id="head_accents" transform="translate(-38.562516,-23.609584)">
         <path
           d="m 73.026301,75.979572 c 0,0 41.614249,-8.322852 66.045849,0"
           id="forehead_lower_accent"
