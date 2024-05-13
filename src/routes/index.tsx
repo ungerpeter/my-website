@@ -1,5 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { SvgAvatar } from "~/components/svg-avatar/svg-avatar";
+import { center } from "~/styled-system/patterns";
 
 export default component$(() => {
   return (
@@ -7,6 +9,9 @@ export default component$(() => {
       <h1>Work in Progress</h1>
       <div class="box">
         <p>come back later!</p>
+      </div>
+      <div class={center({ marginTop: "3rem" })}>
+        <SvgAvatar />
       </div>
     </>
   );
