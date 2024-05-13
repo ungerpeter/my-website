@@ -13,12 +13,12 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+export const head: DocumentHead = ({params}) => ({
+  title: `${params.postId} - Peter's Blog`,
   meta: [
     {
       name: "description",
-      content: "Qwik site description",
+      content: "TODO: resolve post entity and get description",
     },
   ],
-};
+});
