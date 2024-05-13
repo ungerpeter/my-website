@@ -144,3 +144,19 @@ article, .article {
   border-radius: var(--border-radius);
   background-color: var(--fg-color-muted);
 }
+
+input {
+  padding: 0.5rem;
+  color: black;
+}
+
+button {
+  padding: 0.5rem;
+  display: inline-flex;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+button:hover {
+  cursor: pointer;
+}

@@ -48,7 +48,9 @@
     "wrangler": "^3.0.0"
   },
   "dependencies": {
+    "@modular-forms/qwik": "^0.24.0",
     "@qwik-ui/headless": "^0.3.8",
-    "@qwikest/icons": "^0.0.13"
+    "@qwikest/icons": "^0.0.13",
+    "valibot": "^0.30.0"
   }
 }
