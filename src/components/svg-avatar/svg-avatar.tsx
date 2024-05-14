@@ -1,11 +1,81 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import { css } from "~/styled-system/css";
 
 export interface SvgAvatarProps {}
 
+export interface TransformMatrix {
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+  e: number;
+  f: number;
+}
+
+export type TransformsStore = {
+  pupils?: TransformMatrix;
+};
+
 export const SvgAvatar = component$<SvgAvatarProps>(() => {
+  const svgRef = useSignal<SVGSVGElement>();
+  const pupilsRef = useSignal<SVGGElement>();
+  const animate = useSignal(false);
+  // const baseTransforms = useStore<TransformsStore>(() => ({}));
+
+  const pupilsMaxTranslateX = 3.2;
+  const pupilsMaxTranslateY = 2.3;
+
+  // eslint-disable-next-line qwik/no-use-visible-task
+  useVisibleTask$(() => {
+    animate.value = true;
+    window.addEventListener("mousemove", (event) => {
+      if (svgRef.value && pupilsRef.value) {
+        // if (!baseTransforms.pupils) {
+        //   const matrix = pupilsRef.value.transform.baseVal.getItem(0).matrix;
+        //   baseTransforms.pupils = {
+        //     a: matrix.a,
+        //     b: matrix.b,
+        //     c: matrix.c,
+        //     d: matrix.d,
+        //     e: matrix.e,
+        //     f: matrix.f,
+        //   };
+        // }
+        const rect = pupilsRef.value.getBoundingClientRect();
+        const offsetX = (event.clientX - rect.left - rect.width / 2) / 100;
+        const offsetY = (event.clientY - rect.top - rect.height / 2) / 100;
+        const translateX =
+          offsetX < 0
+            ? Math.max(offsetX, -pupilsMaxTranslateX)
+            : Math.min(offsetX, pupilsMaxTranslateX);
+        const translateY =
+          offsetY < 0
+            ? Math.max(offsetY, -pupilsMaxTranslateY)
+            : Math.min(offsetY, pupilsMaxTranslateY);
+        console.log(translateX, translateY);
+        //const matrix = new DOMMatrix(Object.values(baseTransforms.pupils));
+        const matrix = new DOMMatrix();
+        matrix.translateSelf(translateX, translateY);
+        const svgMatrix = svgRef.value.createSVGMatrix();
+        svgMatrix.a = matrix.a;
+        svgMatrix.b = matrix.b;
+        svgMatrix.c = matrix.c;
+        svgMatrix.d = matrix.d;
+        svgMatrix.e = matrix.e;
+        svgMatrix.f = matrix.f;
+        const svgTransform =
+          pupilsRef.value.transform.baseVal.createSVGTransformFromMatrix(
+            svgMatrix
+          );
+        pupilsRef.value.transform.baseVal.initialize(svgTransform);
+        //pupilsRef.value.transform.baseVal.getItem(0).setMatrix(svgMatrix);
+      }
+    });
+  });
+
   return (
     <svg
+      ref={svgRef}
       width="138.03658mm"
       height="228.6062mm"
       viewBox="0 0 138.03658 228.6062"
@@ -22,22 +92,34 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
         "& #glasses": {
           fillOpacity: 0.3,
           strokeWidth: 1.5,
-          stroke: '#999',
+          stroke: "#999",
         },
         "& #lips": {
           strokeWidth: 0.3,
-          stroke: '#999',
+          stroke: "#999",
         },
         "& #eye_accents": {
           strokeWidth: 0.3,
-          stroke: '#999',
+          stroke: "#999",
         },
         "& #head_accents": {
           strokeWidth: 0.3,
-          stroke: '#999',
-        }
+          stroke: "#999",
+        },
       })}
     >
+      <defs>
+        <clipPath id="eyes-clip-path" transform="translate(6,3)">
+          <path
+            d="m 126.0569,114.15587 c 1.46028,-2.70064 2.80204,-3.13415 4.33238,-4.1236 2.04901,-1.3248 4.34287,-2.3825 6.73348,-2.87086 2.19907,-0.44923 4.21484,7.5e-4 6.42029,0.41758 2.29539,0.43383 4.52612,1.34824 6.52469,2.55768 1.04465,0.63217 2.78914,1.81057 2.76646,2.40108 -0.0323,0.84027 -1.84427,1.78234 -3.28844,2.55767 -2.02106,1.08506 -3.72042,1.66324 -5.58513,2.2445 -1.96633,0.61294 -4.05598,1.12681 -6.1071,0.93955 -1.68777,-0.15409 -3.19786,-1.12395 -4.80217,-1.67032 -1.45834,-0.49665 -2.97373,-0.84276 -4.38459,-1.46152 -0.75568,-0.33142 -1.7836,-0.0694 -2.29669,0 -0.34354,0.0465 -0.47807,-0.68681 -0.31318,-0.99176 z"
+            id="right_eye"
+          />
+          <path
+            d="m 88.541699,115.05104 c -1.097955,-1.28518 -1.439202,-2.54498 -3.825247,-3.58202 -3.026787,-1.31552 -6.310965,-2.34484 -9.611106,-2.37801 -2.844282,-0.0286 -5.757122,0.65502 -8.323021,1.88259 -2.47194,1.18261 -4.262928,3.52755 -4.311874,4.19777 -0.07555,1.03451 3.974744,3.33838 7.493173,4.40657 2.657248,0.80673 5.692525,1.04319 8.203607,0.5945 2.254904,-0.40291 3.386334,-1.5857 5.459302,-2.56024 0.828864,-0.38967 1.599618,-0.92652 2.47709,-1.189 1.660249,-0.49664 3.563711,-0.0546 2.438076,-1.37216 z"
+            id="left_eye"
+          />
+        </clipPath>
+      </defs>
       <g id="head" transform="translate(-38.562516,-23.609584)">
         <path
           d="m 106.2092,23.743095 c 32.67207,-0.22761 53.37151,31.457279 58.96805,43.97349 1.01176,2.262736 1.77114,6.228292 1.90051,8.70775 0.46167,8.847822 0.20377,25.086455 0.7979,35.492775 0.71904,12.59418 2.99778,12.14163 2.99778,35.57365 0,23.43202 -8.70069,41.75927 -17.78683,55.55885 -9.08614,13.79958 -19.85066,22.60696 -30.7772,26.78016 -10.92654,4.1732 -17.58265,4.41576 -29.378243,0.3997 -11.795597,-4.01606 -26.060075,-13.28842 -35.57365,-28.17912 -9.513575,-14.8907 -14.18949,-39.04157 -14.18949,-58.95634 0,-19.91477 1.649477,-20.01859 2.398223,-31.97631 0.748746,-11.957722 0.926479,-33.039388 1.99852,-39.770546 1.072041,-6.731158 20.944871,-47.341425 58.64443,-47.604059 z"
@@ -88,16 +170,21 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           id="left_eye"
         />
       </g>
-      <g id="pupils" transform="translate(-44.543392,-26.650707)">
-        <path
-          id="left_pupil"
-          d="m 80.792498,114.54897 a 5.2712803,5.2712803 0 0 1 -5.266939,5.27128 5.2712803,5.2712803 0 0 1 -5.275615,-5.26259 5.2712803,5.2712803 0 0 1 5.258247,-5.27995 5.2712803,5.2712803 0 0 1 5.284278,5.25389 l -5.271252,0.0174 z"
-          transform="translate(5.9808756,3.0411232)"
-        />
-        <path
-          id="right_pupil"
-          d="m 150.43421,115.66405 a 5.2712803,5.2712803 0 0 1 -5.26693,5.27128 5.2712803,5.2712803 0 0 1 -5.27562,-5.2626 5.2712803,5.2712803 0 0 1 5.25825,-5.27995 5.2712803,5.2712803 0 0 1 5.28428,5.2539 l -5.27126,0.0174 z"
-        />
+      <g
+        clip-path="url(#eyes-clip-path)"
+        transform="translate(-44.543392,-26.650707)"
+      >
+        <g id="pupils" ref={pupilsRef}>
+          <path
+            id="left_pupil"
+            d="m 80.792498,114.54897 a 5.2712803,5.2712803 0 0 1 -5.266939,5.27128 5.2712803,5.2712803 0 0 1 -5.275615,-5.26259 5.2712803,5.2712803 0 0 1 5.258247,-5.27995 5.2712803,5.2712803 0 0 1 5.284278,5.25389 l -5.271252,0.0174 z"
+            transform="translate(5.9808756,3.0411232)"
+          />
+          <path
+            id="right_pupil"
+            d="m 150.43421,115.66405 a 5.2712803,5.2712803 0 0 1 -5.26693,5.27128 5.2712803,5.2712803 0 0 1 -5.27562,-5.2626 5.2712803,5.2712803 0 0 1 5.25825,-5.27995 5.2712803,5.2712803 0 0 1 5.28428,5.2539 l -5.27126,0.0174 z"
+          />
+        </g>
       </g>
       <g id="eye_accents" transform="translate(-38.562516,-23.609584)">
         <path
