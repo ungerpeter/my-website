@@ -52,7 +52,6 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           offsetY < 0
             ? Math.max(offsetY, -pupilsMaxTranslateY)
             : Math.min(offsetY, pupilsMaxTranslateY);
-        console.log(translateX, translateY);
         //const matrix = new DOMMatrix(Object.values(baseTransforms.pupils));
         const matrix = new DOMMatrix();
         matrix.translateSelf(translateX, translateY);
