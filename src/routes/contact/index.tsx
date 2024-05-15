@@ -32,7 +32,6 @@ export default component$(() => {
     action: useFormAction(),
     validate: valiForm$(ContactFormSchema),
   });
-
   const handleSubmit = $<SubmitHandler<ContactForm>>((values, event) => {
     console.log("submitting form", values, event);
   });
