@@ -3,7 +3,8 @@ import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import type { InitialValues, SubmitHandler } from "@modular-forms/qwik";
 import { formAction$, useForm, valiForm$ } from "@modular-forms/qwik";
 import { email, type Input, minLength, object, string } from "valibot";
-import { grid } from "~/styled-system/patterns";
+import { css } from "~/styled-system/css";
+import { center, flex, grid } from "~/styled-system/patterns";
 
 export const ContactFormSchema = object({
   name: string([minLength(1, "Please tell me your name.")]),
@@ -40,7 +41,14 @@ export default component$(() => {
     <>
       <h1>Contact</h1>
       <div class="box">
-        <Form onSubmit$={handleSubmit} class={grid({})}>
+        <p>Work in progress! Contact form is not hooked up yet..</p>
+      </div>
+      <br />
+      <div class="box">
+        <Form
+          onSubmit$={handleSubmit}
+          class={[center({}), grid({ gridTemplateColumns: "150px 1fr" })]}
+        >
           <label for="name">Name</label>
           <Field name="name">
             {(field, props) => (
@@ -73,7 +81,9 @@ export default component$(() => {
               </div>
             )}
           </Field>
-          <button type="submit">Hit me up</button>
+          <button type="submit" class={css({ justifyContent: "center" })}>
+            Hit me up
+          </button>
         </Form>
       </div>
       <br />

@@ -45,6 +45,10 @@ export default component$(() => {
   return (
     <>
       <h1>Portfolio</h1>
+      <div class="box">
+        <p>Work in progress! Just simple projects view for the moment...</p>
+      </div>
+      <br />
       <Grid columns={3}>
         {projects.map((project, idx) => (
           <div key={`${idx}__${project.title}`} class="box">

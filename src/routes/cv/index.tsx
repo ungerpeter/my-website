@@ -15,27 +15,36 @@ export default component$(() => {
         <div class="article">
           <p>
             As a Senior Software Engineer and Tech Lead at a leading IT company,
-            I excel in designing in- novative software solutions, concentrating
-            on Software Architecture, IT Security, and Artifi- cial
-            Intelligence. My role involves leveraging cutting-edge technologies
-            and implementing best practices to deliver high-quality projects,
-            ensuring excellence and reliability, that meet the evolving needs of
-            the tech industry.
+            I excel in designing innovative software solutions, concentrating on
+            Software Architecture, IT Security, and Artificial Intelligence. My
+            role involves leveraging cutting edge technologies and implementing
+            best practices to deliver high quality projects, ensuring excellence
+            and reliability, that meet the evolving needs of the tech industry.
           </p>
         </div>
         <div class="article">
           <Grid columns={2} gap="0.5rem">
-            <GridItem class={css({ textAlign: 'end' })}>Fullstack Development</GridItem>
+            <GridItem class={css({ textAlign: "end" })}>
+              Fullstack Development
+            </GridItem>
             <Progress value={90} />
-            <GridItem class={css({ textAlign: 'end' })}>Software-Architecture</GridItem>
+            <GridItem class={css({ textAlign: "end" })}>
+              Software-Architecture
+            </GridItem>
             <Progress value={80} />
-            <GridItem class={css({ textAlign: 'end' })}>IT-Security</GridItem>
+            <GridItem class={css({ textAlign: "end" })}>IT-Security</GridItem>
             <Progress value={60} />
-            <GridItem class={css({ textAlign: 'end' })}>Artificial Intelligence</GridItem>
+            <GridItem class={css({ textAlign: "end" })}>
+              Artificial Intelligence
+            </GridItem>
             <Progress value={40} />
-            <GridItem class={css({ textAlign: 'end' })}>DevOps / CI-CD</GridItem>
+            <GridItem class={css({ textAlign: "end" })}>
+              DevOps / CI-CD
+            </GridItem>
             <Progress value={70} />
-            <GridItem class={css({ textAlign: 'end' })}>Agile Development</GridItem>
+            <GridItem class={css({ textAlign: "end" })}>
+              Agile Development
+            </GridItem>
             <Progress value={50} />
           </Grid>
         </div>
@@ -44,7 +53,9 @@ export default component$(() => {
       <div class="article">
         <section>
           <Grid columns={5}>
-            <GridItem class={css({ alignSelf: 'center' })}>8/2021 - present</GridItem>
+            <GridItem class={css({ alignSelf: "center" })}>
+              8/2021 - present
+            </GridItem>
             <GridItem colSpan={4}>
               <Flex justify="space-between">
                 <h3>Senior Software Engineer - Tech Lead</h3>
@@ -52,7 +63,7 @@ export default component$(() => {
               </Flex>
               At Abraxas Informatik AG, I currently serve as a Senior Software
               Engineer on the development of enterprise-grade chatbot solutions
-              with specialization in Software Archi- tecture, IT Security, and
+              with specialization in Software Architecture, IT Security, and
               Artificial Intelligence. I am instrumental in creating and
               refining secure, user-friendly solutions with advanced AI
               capabilities to meet the complex needs of our clients.
@@ -61,7 +72,9 @@ export default component$(() => {
         </section>
         <section>
           <Grid columns={5}>
-            <GridItem class={css({ alignSelf: 'center' })}>1/2020 - 7/2021</GridItem>
+            <GridItem class={css({ alignSelf: "center" })}>
+              1/2020 - 7/2021
+            </GridItem>
             <GridItem colSpan={4}>
               <Flex justify="space-between">
                 <h3>Software Engineer - Fullstack</h3>
@@ -79,14 +92,16 @@ export default component$(() => {
         </section>
         <section>
           <Grid columns={5}>
-            <GridItem class={css({ alignSelf: 'center' })}>9/2015 - 12/2019</GridItem>
+            <GridItem class={css({ alignSelf: "center" })}>
+              9/2015 - 12/2019
+            </GridItem>
             <GridItem colSpan={4}>
               <Flex justify="space-between">
                 <h3>IT Administrator & Software Engineer</h3>
                 <h4>coatmaster AG</h4>
               </Flex>
               At coatmaster AG, I was responsible for overseeing diverse IT
-              domains including network infras- tructure, cloud services, and
+              domains including network infrastructure, cloud services, and
               hardware. I also develop customized software solutions to optimize
               our products and address customer requirements. My role involves
               ensuring seamless integration and continual refinement of IT
@@ -100,7 +115,9 @@ export default component$(() => {
       <div class="article">
         <section>
           <Grid columns={5}>
-            <GridItem class={css({ alignSelf: 'center' })}>2/2024 - present</GridItem>
+            <GridItem class={css({ alignSelf: "center" })}>
+              2/2024 - present
+            </GridItem>
             <GridItem colSpan={4}>
               <Flex justify="space-between">
                 <h3>Lecturer for Cryptography & Security - CDS207</h3>
@@ -115,19 +132,20 @@ export default component$(() => {
         </section>
         <section>
           <Grid columns={5}>
-            <GridItem class={css({ alignSelf: 'center' })}>9/2015 - 7/2021</GridItem>
+            <GridItem class={css({ alignSelf: "center" })}>
+              9/2015 - 7/2021
+            </GridItem>
             <GridItem colSpan={4}>
               <Flex justify="space-between">
                 <h3>Bachelor of Science (B.Sc.) - Computer Science</h3>
                 <h4>Zurich University of Applied Sciences (ZHAW)</h4>
               </Flex>
-              I earned a part-time Bachelor's in Computer Science from the
-              School of Engineering, ZHAW, with a focus on information
-              engineering and data science. My thesis explored separating
-              parallel ut- terances in audio recordings in NLP. Simultaneously,
-              I applied theoretical knowledge to practical use as a part-time
-              Software Engineer, gaining insights in software development and
-              data analysis.
+              I earned Bachelor's degree in Computer Science from the School of
+              Engineering, ZHAW, with a focus on information engineering and
+              data science. My thesis explored separating parallel utterances in
+              audio recordings in NLP. Simultaneously, I applied theoretical
+              knowledge to practical use as a part-time Software Engineer,
+              gaining insights in software development and data analysis.
             </GridItem>
           </Grid>
         </section>

@@ -5,6 +5,10 @@ export default component$(() => {
   return (
     <>
       <h1>Blog</h1>
+      <div class="box">
+        <p>Work in progress! Just dummy posts for the moment...</p>
+      </div>
+      <br />
       <div class="blog-posts-grid">
         <Link href="post_1">
           <article>
