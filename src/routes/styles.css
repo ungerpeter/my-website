@@ -23,7 +23,6 @@ html, body {
 body {
   background-color: var(--bg-color-primary);
   color: var(--fg-color-default);
-  perspective: 1000px;
 }
 
 .sidebar {
