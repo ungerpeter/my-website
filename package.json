@@ -51,6 +51,8 @@
     "@modular-forms/qwik": "^0.24.0",
     "@qwik-ui/headless": "^0.3.8",
     "@qwikest/icons": "^0.0.13",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "valibot": "^0.30.0"
   }
 }
