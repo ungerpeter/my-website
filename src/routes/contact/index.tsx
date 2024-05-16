@@ -4,7 +4,7 @@ import type { InitialValues, SubmitHandler } from "@modular-forms/qwik";
 import { formAction$, useForm, valiForm$ } from "@modular-forms/qwik";
 import { email, type Input, minLength, object, string } from "valibot";
 import { css } from "~/styled-system/css";
-import { center, flex, grid } from "~/styled-system/patterns";
+import { center, grid } from "~/styled-system/patterns";
 
 export const ContactFormSchema = object({
   name: string([minLength(1, "Please tell me your name.")]),

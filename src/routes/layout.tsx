@@ -155,7 +155,3 @@ export default component$(() => {
     </>
   );
 });
-function useRef<T>() {
-  throw new Error("Function not implemented.");
-}
-

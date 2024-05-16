@@ -1,4 +1,4 @@
-import { component$, useVisibleTask$ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import { parseMarkdown } from "~/utils/markdown";
 
@@ -86,7 +86,7 @@ const exampleBlogPost: BlogPost = {
   summary: "This is a summary of the example blog post.",
   tags: ["example", "blog", "post"],
   readingTimeSeconds: 120,
-}
+};
 
 export const useBlogPost = routeLoader$(async () => {
   // const { slug } = params;
@@ -95,8 +95,8 @@ export const useBlogPost = routeLoader$(async () => {
   const parsedMarkdown = await parseMarkdown(blogPost.content);
   return {
     ...blogPost,
-    parsedMarkdown
-  }
+    parsedMarkdown,
+  };
 });
 
 export default component$(() => {
@@ -107,12 +107,10 @@ export default component$(() => {
   //   console.log(blogPost.value.parsedMarkdown);
   // });
 
-  return (
-    <div dangerouslySetInnerHTML={blogPost.value.parsedMarkdown} />
-  );
+  return <div dangerouslySetInnerHTML={blogPost.value.parsedMarkdown} />;
 });
 
-export const head: DocumentHead = ({params}) => ({
+export const head: DocumentHead = ({ params }) => ({
   title: `${params.postId} - Peter's Blog`,
   meta: [
     {
