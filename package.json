@@ -25,7 +25,7 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "prebuild.pandacss": "panda codegen --silent",
     "preview": "qwik build preview && vite preview --open",
-    "serve": "wrangler pages dev ./dist --compatibility-flags=nodejs_als",
+    "serve": "wrangler pages dev ./dist --live-reload",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
   },
@@ -33,6 +33,7 @@
     "@builder.io/qwik": "^1.5.4",
     "@builder.io/qwik-city": "^1.5.4",
     "@builder.io/vite-plugin-macro": "~0.0.7",
+    "@cloudflare/workers-types": "^4.20240512.0",
     "@pandacss/dev": "^0.36.1",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.12.7",
@@ -45,7 +46,7 @@
     "undici": "*",
     "vite": "^5.2.10",
     "vite-tsconfig-paths": "^4.2.1",
-    "wrangler": "^3.0.0"
+    "wrangler": "^3.57.0"
   },
   "dependencies": {
     "@modular-forms/qwik": "^0.24.0",
