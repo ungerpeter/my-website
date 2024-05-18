@@ -77,6 +77,24 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
   const viewBox = "0 0 138.03658 228.6062";
   const gTransform = "translate(-38.562516,-23.609584)";
 
+  const zLayers = {
+    head: 0,
+    chin_beard: 15,
+    ears: 15,
+    eyes: 30,
+    pupils: 30,
+    eye_accents_upper: 32,
+    eye_accents_lower: 34,
+    head_accents: 35,
+    lips: 40,
+    goat_beard: 40,
+    eyebrows: 45,
+    mustache_beard: 45,
+    nose: 45,
+    glasses: 50,
+    nose_center: 60,
+  };
+
   return (
     <div class={center({ perspective: "1000px" })}>
       <div
@@ -118,7 +136,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           },
         })}
       >
-        <div id="head">
+        <div id="head" style={{ transform: `translateZ(${zLayers.head}px)` }}>
           <svg viewBox={viewBox}>
             <g id="head_g" transform={gTransform}>
               <path
@@ -129,7 +147,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="eyes">
+        <div id="eyes" style={{ transform: `translateZ(${zLayers.eyes}px)` }}>
           <svg ref={eyesSvgRef} viewBox={viewBox}>
             <g id="eyes_g" transform={gTransform}>
               <path
@@ -144,7 +162,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="pupils">
+        <div id="pupils" style={{ transform: `translateZ(${zLayers.pupils}px)` }}>
           <svg viewBox={viewBox}>
             <defs>
               <clipPath id="eyes-clip-path">
@@ -177,7 +195,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="lips">
+        <div id="lips" style={{ transform: `translateZ(${zLayers.lips}px)` }}>
           <svg viewBox={viewBox}>
             <g id="lips_g" transform={gTransform}>
               <path
@@ -192,7 +210,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="goat_beard">
+        <div id="goat_beard" style={{ transform: `translateZ(${zLayers.goat_beard}px)` }}>
           <svg viewBox={viewBox}>
             <g id="goat_beard_g" transform={gTransform}>
               <path d="m 90.098837,196.56656 c 0,0 2.887714,1.39103 7.974586,2.93801 2.748957,0.83599 8.394307,-1.95867 8.394307,-1.95867 0,0 6.1345,1.8617 8.81401,1.25914 6.17871,-1.38945 8.53421,-2.09857 8.53421,-2.09857 0,0 -2.37581,6.13818 -2.6582,9.37363 -0.15897,1.82138 -0.0364,3.72787 0.55962,5.4563 0.97012,2.81331 5.43306,8.29264 5.43306,8.29264 0,0 -13.40446,4.45467 -19.69708,4.40919 -7.36474,-0.0532 -21.36093,-4.46631 -21.36093,-4.46631 0,0 3.695996,-5.8832 4.566037,-8.37542 0.680664,-1.94975 0.731538,-4.09093 0.699526,-6.15583 -0.04529,-2.92132 -1.259146,-8.67411 -1.259146,-8.67411 z" />
@@ -200,7 +218,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="chin_beard">
+        <div id="chin_beard" style={{ transform: `translateZ(${zLayers.chin_beard}px)` }}>
           <svg viewBox={viewBox}>
             <g id="chin_beard_g" transform={gTransform}>
               <path d="m 170.40873,136.70018 c 0,0 -2.56074,20.71337 -9.3727,30.78779 -6.81196,10.07443 -12.82277,12.79395 -14.88127,18.59435 -4.11699,11.60079 -4.72839,21.29599 -4.72839,21.29599 0,0 -12.49833,10.83383 -18.61708,12.36602 -3.05938,0.76609 -7.88682,2.17991 -13.77229,2.49139 -5.88547,0.31148 -12.558798,-1.15481 -16.608206,-2.09633 -8.098824,-1.88306 -17.118155,-9.75364 -17.118155,-9.75364 0,0 0.679684,-11.31312 -6.15837,-22.34407 -3.511336,-5.66439 -7.840823,-7.38749 -15.37884,-19.21063 -7.011427,-10.99719 -10.584637,-34.69188 -10.584637,-34.69188 0,0 -3.03469,18.90179 -1.016406,34.0934 2.018286,15.1916 8.480693,43.33038 16.770673,55.54181 8.28998,12.21143 9.435549,20.56648 22.321403,25.0208 6.442928,2.22716 16.270348,3.3341 25.989378,3.29076 9.71903,-0.0433 19.32967,-1.23695 25.33904,-3.61089 12.01874,-4.74788 12.06411,-11.0954 20.19817,-23.90035 8.13406,-12.80496 18.08556,-46.42884 19.81988,-61.46415 1.73433,-15.0353 -2.2022,-26.41037 -2.2022,-26.41037 z" />
@@ -208,7 +226,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="mustache_beard">
+        <div id="mustache_beard" style={{ transform: `translateZ(${zLayers.mustache_beard}px)` }}>
           <svg viewBox={viewBox}>
             <g id="mustache_beard_g" transform={gTransform}>
               <path d="m 107.9862,166.31029 c 0,0 -7.87819,-2.27535 -12.531025,-2.24346 -2.810679,0.0193 -8.104846,3.0668 -11.503796,5.19877 -3.313881,2.07861 -7.322155,4.33055 -10.468794,7.15035 -3.289473,2.9478 -5.281921,7.71017 -5.341561,12.1268 -0.06528,4.8341 7.236921,13.15671 7.236921,13.15671 0,0 -1.962614,-9.48341 0.847607,-13.01235 3.905136,-4.90389 11.771363,-6.10316 18.023,-6.56708 8.896928,-0.66021 16.338748,-1.15464 24.876688,-0.50581 6.48493,0.4928 14.25976,2.51856 18.60047,7.36163 2.67122,2.98037 3.75353,11.40496 3.75353,11.40496 0,0 6.1663,-9.59693 5.6303,-14.86976 -0.51846,-5.10025 -1.93409,-5.89185 -5.74292,-9.32321 -2.45436,-2.21112 -7.30624,-5.05024 -10.03914,-7.03625 -2.77029,-2.01318 -8.67615,-6.0339 -11.97962,-6.0318 -3.00425,0.002 -11.36166,3.1905 -11.36166,3.1905 z" />
@@ -216,7 +234,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="ears">
+        <div id="ears" style={{ transform: `translateZ(${zLayers.ears}px)` }}>
           <svg viewBox={viewBox}>
             <g id="ears_g" transform={gTransform}>
               <path
@@ -231,20 +249,12 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="eye_accents">
+        <div id="eye_accents_lower" style={{ transform: `translateZ(${zLayers.eye_accents_lower}px)` }}>
           <svg viewBox={viewBox}>
-            <g id="eye_accents_g" transform={gTransform}>
-              <path
-                d="m 125.32151,119.71549 c 0,0 4.34014,4.34014 7.77608,4.70182"
-                id="eye_accent_right_upper"
-              />
+            <g id="eye_accents_lower_g" transform={gTransform}>
               <path
                 d="m 124.23598,121.8412 c 2.17007,2.17007 6.32937,4.70182 15.00965,5.06349"
                 id="eye_accent_right_lower"
-              />
-              <path
-                d="m 90.781237,119.71549 c 0,0 -0.542518,3.61679 -8.499441,5.9677"
-                id="eye_accent_left_upper"
               />
               <path
                 d="m 90.962558,122.97156 c 1.376072,-1.76924 0.149156,3.52454 -14.062055,6.28549"
@@ -254,7 +264,22 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="eyebrows">
+        <div id="eye_accents_upper" style={{ transform: `translateZ(${zLayers.eye_accents_upper}px)` }}>
+          <svg viewBox={viewBox}>
+            <g id="eye_accents_upper_g" transform={gTransform}>
+              <path
+                d="m 125.32151,119.71549 c 0,0 4.34014,4.34014 7.77608,4.70182"
+                id="eye_accent_right_upper"
+              />
+              <path
+                d="m 90.781237,119.71549 c 0,0 -0.542518,3.61679 -8.499441,5.9677"
+                id="eye_accent_left_upper"
+              />
+            </g>
+          </svg>
+        </div>
+
+        <div id="eyebrows" style={{ transform: `translateZ(${zLayers.eyebrows}px)` }}>
           <svg viewBox={viewBox}>
             <g id="eyebrows_g" transform={gTransform}>
               <path
@@ -269,7 +294,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="head_accents">
+        <div id="head_accents" style={{ transform: `translateZ(${zLayers.head_accents}px)` }}>
           <svg viewBox={viewBox}>
             <g id="head_accents_g" transform={gTransform}>
               <path
@@ -288,16 +313,12 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="nose">
+        <div id="nose" style={{ transform: `translateZ(${zLayers.nose}px)` }}>
           <svg viewBox={viewBox}>
             <g id="nose_g" transform={gTransform}>
               <path
                 d="m 96.962697,160.93226 c 0,0 -2.963189,1.78531 -4.35606,1.21002 -2.315057,-0.95617 -3.371739,-4.05239 -3.710721,-6.53409 -0.300086,-2.19695 1.613358,-6.45343 1.613358,-6.45343"
                 id="nose_left"
-              />
-              <path
-                d="m 94.139323,158.10889 c 0,0 4.213411,-0.8762 6.211417,-0.32267 1.62429,0.44999 2.58267,2.33138 4.19473,2.82337 2.2632,0.69071 4.80337,0.57472 7.09877,0 2.15884,-0.54053 3.70822,-2.701 5.88875,-3.14604 1.7985,-0.36707 5.48541,0.484 5.48541,0.484"
-                id="nose_center"
               />
               <path
                 d="m 120.5177,160.52892 c 0,0 3.61444,1.69471 5.16273,0.88735 2.1865,-1.14015 3.27951,-4.23313 3.14605,-6.69543 -0.13977,-2.5787 -2.61078,-4.45943 -4.03339,-6.61476 -1.70985,-2.59052 -4.0954,-4.76852 -5.40474,-7.58277 -0.81983,-1.7621 -1.45202,-5.64675 -1.45202,-5.64675"
@@ -307,7 +328,17 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="glasses">
+        <div id="nose_center" style={{ transform: `translateZ(${zLayers.nose_center}px)` }}>
+          <svg viewBox={viewBox}>
+            <g id="nose_center_g" transform={gTransform}>
+              <path
+                d="m 94.139323,158.10889 c 0,0 4.213411,-0.8762 6.211417,-0.32267 1.62429,0.44999 2.58267,2.33138 4.19473,2.82337 2.2632,0.69071 4.80337,0.57472 7.09877,0 2.15884,-0.54053 3.70822,-2.701 5.88875,-3.14604 1.7985,-0.36707 5.48541,0.484 5.48541,0.484"
+              />
+            </g>
+          </svg>
+        </div>
+
+        <div id="glasses" style={{ transform: `translateZ(${zLayers.glasses}px)` }}>
           <svg viewBox={viewBox}>
             <g id="glasses_g" transform={gTransform}>
               <path
