@@ -2,12 +2,15 @@
  * This is the base config for vite.
  * When building, the adapter config is used which loads this file and extends it.
  */
-import { defineConfig, type UserConfig } from "vite";
+import { defineConfig } from "vite";
 import { qwikVite } from "@builder.io/qwik/optimizer";
 import { qwikCity } from "@builder.io/qwik-city/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import pkg from "./package.json";
 import { macroPlugin } from "@builder.io/vite-plugin-macro";
+import { Miniflare } from 'miniflare';
+import type { KVNamespace } from "@cloudflare/workers-types";
+
 type PkgDep = Record<string, string>;
 const { dependencies = {}, devDependencies = {} } = pkg as any as {
   dependencies: PkgDep;
@@ -19,19 +22,39 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  * Note that Vite normally starts from `index.html` but the qwikCity plugin makes start at `src/entry.ssr.tsx` instead.
  */
 
-export default defineConfig(({ command, mode }): UserConfig => {
+export default defineConfig(async ({ command, mode }) => {
+  let platform = {}
+  if (mode === 'development' || mode === 'ssr') {
+    const mf = new Miniflare({
+      modules: true,
+      script: "",
+      kvNamespaces: [ "KV" ],
+    });
+    const kv = await mf.getKVNamespace('KV') as KVNamespace;
+    platform = {
+      env: { KV: kv }
+    }
+  }
+
   return {
     plugins: [
       macroPlugin({ preset: "pandacss" }),
-      qwikCity(),
+      qwikCity({
+        platform
+      }),
       qwikVite(),
       tsconfigPaths(),
     ],
+    build: {
+      rollupOptions: {
+        external: ["@cloudflare/workers-types", "@miniflare/kv", "@miniflare/storage-memory", '@miniflare/shared'],
+      },
+    },
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.
       // For example ['better-sqlite3'] if you use that in server functions.
-      exclude: [],
+      exclude: ['miniflare/*'],
     },
     /**
      * This is an advanced setting. It improves the bundling of your server code. To use it, make sure you understand when your consumed packages are dependencies or dev depencies. (otherwise things will break in production)

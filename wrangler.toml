@@ -3,6 +3,10 @@ pages_build_output_dir = "./dist"
 compatibility_date = "2024-05-16"
 compatibility_flags = ['nodejs_compat']
 
+kv_namespaces = [
+  { binding = "KV", id = "d2869709fc024df7bb0812803e6e5c2c" }
+]
+
 [vars]
 UNSTABLE_PRE_BUILD = "bun upgrade"
 

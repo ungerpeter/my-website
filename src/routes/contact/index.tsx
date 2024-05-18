@@ -3,10 +3,10 @@ import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import type { InitialValues, SubmitHandler } from "@modular-forms/qwik";
 import { formAction$, useForm, valiForm$ } from "@modular-forms/qwik";
 import { email, type Input, minLength, object, string } from "valibot";
-import { Redis } from "@upstash/redis";
 import { nanoid } from "nanoid";
 import { css } from "~/styled-system/css";
 import { center, grid } from "~/styled-system/patterns";
+// import { getKVNamespace } from "~/utils/cloudflare-workers";
 
 export const ContactFormSchema = object({
   name: string([minLength(1, "Please tell me your name.")]),
@@ -23,13 +23,21 @@ export type ContactFormSubmission = ContactForm & {
   submitDate: Date;
 };
 
-export const storeFormSubmission =
-  (connection: { url: string; token: string }) =>
-  (submission: ContactFormSubmission) => {
-    const redis = new Redis(connection);
-    const submissionId = `contactform:submission:${nanoid()}`;
-    return redis.hmset(submissionId, submission);
-  };
+export const storeFormSubmission = async (
+  platform: QwikCityPlatform,
+  submission: ContactFormSubmission
+) => {
+  if (!platform.env) {
+    console.warn("Platform env not set. Cannot store form submission.");
+    return undefined;
+  }
+  const MY_KV = platform.env.KV as KVNamespace;
+  const submissionId = `contactform:submission:${nanoid()}`;
+  await MY_KV.put(submissionId, JSON.stringify(submission));
+  console.debug("new kv store list");
+  console.dir(await MY_KV.list());
+  return submissionId;
+};
 
 export const useFormLoader = routeLoader$<InitialValues<ContactForm>>(() => ({
   name: "",
@@ -37,14 +45,11 @@ export const useFormLoader = routeLoader$<InitialValues<ContactForm>>(() => ({
   message: "",
 }));
 
-export const useFormAction = formAction$<ContactForm>(async (values, event) => {
+export const useFormAction = formAction$<ContactForm>(async (values, { platform }) => {
   console.log("got form data:", values);
-  const connection = {
-    url: event.env.get("UPSTASH_REDIS_URL") || "",
-    token: event.env.get("UPSTASH_REDIS_TOKEN") || "",
-  };
-  await storeFormSubmission(connection)({ ...values, submitDate: new Date() });
-  console.log("stored form submission");
+  console.log("platform", platform.env);
+  const submitId = await storeFormSubmission(platform, { ...values, submitDate: new Date() });
+  console.log("stored form submission", submitId);
 }, valiForm$(ContactFormSchema));
 
 export default component$(() => {
