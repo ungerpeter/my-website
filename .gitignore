@@ -45,3 +45,5 @@ src/styled-system
 
 # Cloudflare
 functions/**/*.js
+
+.env.local

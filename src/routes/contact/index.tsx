@@ -3,6 +3,8 @@ import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import type { InitialValues, SubmitHandler } from "@modular-forms/qwik";
 import { formAction$, useForm, valiForm$ } from "@modular-forms/qwik";
 import { email, type Input, minLength, object, string } from "valibot";
+import { Redis } from "@upstash/redis";
+import { nanoid } from "nanoid";
 import { css } from "~/styled-system/css";
 import { center, grid } from "~/styled-system/patterns";
 
@@ -17,14 +19,32 @@ export const ContactFormSchema = object({
 
 export type ContactForm = Input<typeof ContactFormSchema>;
 
+export type ContactFormSubmission = ContactForm & {
+  submitDate: Date;
+};
+
+export const storeFormSubmission =
+  (connection: { url: string; token: string }) =>
+  (submission: ContactFormSubmission) => {
+    const redis = new Redis(connection);
+    const submissionId = `contactform:submission:${nanoid()}`;
+    return redis.hmset(submissionId, submission);
+  };
+
 export const useFormLoader = routeLoader$<InitialValues<ContactForm>>(() => ({
   name: "",
   email: "",
   message: "",
 }));
 
-export const useFormAction = formAction$<ContactForm>((values) => {
+export const useFormAction = formAction$<ContactForm>(async (values, event) => {
   console.log("got form data:", values);
+  const connection = {
+    url: event.env.get("UPSTASH_REDIS_URL") || "",
+    token: event.env.get("UPSTASH_REDIS_TOKEN") || "",
+  };
+  await storeFormSubmission(connection)({ ...values, submitDate: new Date() });
+  console.log("stored form submission");
 }, valiForm$(ContactFormSchema));
 
 export default component$(() => {

@@ -1,20 +1,19 @@
-version: '3.8'
+version: "3.8"
 services:
-
-  my-website:
-    build: 
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - node_modules:/app/node_modules
-      - .:/app
-    ports:
-      - "5173:5173"
-    networks:
-      - my-website-net
+  # my-website:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - .:/app
+  #     - node_modules:/app/node_modules
+  #   ports:
+  #     - "5173:5173"
+  #   networks:
+  #     - my-website-net
 
   dragonfly:
-    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
+    image: "docker.dragonflydb.io/dragonflydb/dragonfly"
     ulimits:
       memlock: -1
     ports:
