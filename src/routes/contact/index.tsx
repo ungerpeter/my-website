@@ -6,7 +6,6 @@ import { email, type Input, minLength, object, string } from "valibot";
 import { nanoid } from "nanoid";
 import { css } from "~/styled-system/css";
 import { center, grid } from "~/styled-system/patterns";
-// import { getKVNamespace } from "~/utils/cloudflare-workers";
 
 export const ContactFormSchema = object({
   name: string([minLength(1, "Please tell me your name.")]),
@@ -19,6 +18,10 @@ export const ContactFormSchema = object({
 
 export type ContactForm = Input<typeof ContactFormSchema>;
 
+export type ContactFormResponse = {
+  submissionId?: string;
+};
+
 export type ContactFormSubmission = ContactForm & {
   submitDate: Date;
 };
@@ -28,45 +31,80 @@ export const storeFormSubmission = async (
   submission: ContactFormSubmission
 ) => {
   if (!platform.env) {
-    console.warn("Platform env not set. Cannot store form submission.");
-    return undefined;
+    throw new Error("No platform environment found.");
   }
-  const MY_KV = platform.env.KV as KVNamespace;
+  const kvStore = platform.env.KV as KVNamespace | undefined;
+  if (!kvStore) {
+    throw new Error("No KV namespace set.");
+  }
   const submissionId = `contactform:submission:${nanoid()}`;
-  await MY_KV.put(submissionId, JSON.stringify(submission));
+  await kvStore.put(submissionId, JSON.stringify(submission));
   console.debug("new kv store list");
-  console.dir(await MY_KV.list());
+  console.dir(await kvStore.list());
   return submissionId;
 };
 
-export const useFormLoader = routeLoader$<InitialValues<ContactForm>>(() => ({
-  name: "",
-  email: "",
-  message: "",
-}));
+export const useContactFormLoader = routeLoader$<InitialValues<ContactForm>>(
+  () => ({
+    name: "",
+    email: "",
+    message: "",
+  })
+);
 
-export const useFormAction = formAction$<ContactForm>(async (values, { platform }) => {
-  console.log("got form data:", values);
-  console.log("platform", platform.env);
-  const submitId = await storeFormSubmission(platform, { ...values, submitDate: new Date() });
-  console.log("stored form submission", submitId);
+export const useContactFormAction = formAction$<
+  ContactForm,
+  ContactFormResponse
+>(async (values, { platform }) => {
+  const submission: ContactFormSubmission = {
+    ...values,
+    submitDate: new Date(),
+  };
+  const submissionId = await storeFormSubmission(platform, submission).catch(
+    (err) => {
+      console.error(
+        "Error storing form submission",
+        err,
+        "submission",
+        submission
+      );
+      return null;
+    }
+  );
+  if (!submissionId) {
+    return {
+      status: "error",
+      message: "Sorry, something went wrong. Please try again later.",
+    };
+  }
+  console.debug("stored form submission", submissionId, submission);
+  return {
+    status: "success",
+    message: `Hi ${submission.name}! Thank you for your message. I will get back to you as soon as possible.`,
+    data: { submissionId },
+  };
 }, valiForm$(ContactFormSchema));
 
 export default component$(() => {
-  const [, { Form, Field }] = useForm<ContactForm>({
-    loader: useFormLoader(),
-    action: useFormAction(),
+  const [contactForm, { Form, Field }] = useForm<
+    ContactForm,
+    ContactFormResponse
+  >({
+    loader: useContactFormLoader(),
+    action: useContactFormAction(),
     validate: valiForm$(ContactFormSchema),
   });
-  const handleSubmit = $<SubmitHandler<ContactForm>>((values, event) => {
-    console.log("submitting form", values, event);
+  const handleSubmit = $<SubmitHandler<ContactForm>>(() => {
+    console.log("submitting form");
   });
+
+  console.log("contact form response data", contactForm.response);
 
   return (
     <>
       <h1>Contact</h1>
       <div class="box">
-        <p>Work in progress! Contact form is not hooked up yet..</p>
+        <p>{`Work in progress! Contact form works though :-)`}</p>
       </div>
       <br />
       <div class="box">
@@ -111,6 +149,14 @@ export default component$(() => {
           </button>
         </Form>
       </div>
+      {contactForm.response.message && (
+        <>
+          <br />
+          <div class="box">
+            <p>{contactForm.response.message}</p>
+          </div>
+        </>
+      )}
       <br />
       <a href="https://www.buymeacoffee.com/peterunger" target="_blank">
         <img
