@@ -95,10 +95,8 @@ export default component$(() => {
     validate: valiForm$(ContactFormSchema),
   });
   const handleSubmit = $<SubmitHandler<ContactForm>>(() => {
-    console.log("submitting form");
+    console.log("submitting form...");
   });
-
-  console.log("contact form response data", contactForm.response);
 
   return (
     <>
