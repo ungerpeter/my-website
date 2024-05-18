@@ -88,7 +88,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
     head_accents: 35,
     lips: 40,
     goat_beard: 40,
-    eyebrows: 45,
+    eyebrows: 40,
     mustache_beard: 45,
     nose: 45,
     glasses: 50,
