@@ -85,7 +85,9 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
     pupils: 30,
     eye_accents_upper: 32,
     eye_accents_lower: 34,
-    head_accents: 35,
+    head_accents_upper: 29,
+    head_accents_middle: 32,
+    head_accents_lower: 35,
     lips: 40,
     goat_beard: 40,
     eyebrows: 40,
@@ -125,11 +127,11 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
               strokeWidth: 0.3,
               stroke: "#999",
             },
-            "& #eye_accents_g": {
+            "& .eye_accents_g": {
               strokeWidth: 0.3,
               stroke: "#999",
             },
-            "& #head_accents_g": {
+            "& .head_accents_g": {
               strokeWidth: 0.3,
               stroke: "#999",
             },
@@ -251,7 +253,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
 
         <div id="eye_accents_lower" style={{ transform: `translateZ(${zLayers.eye_accents_lower}px)` }}>
           <svg viewBox={viewBox}>
-            <g id="eye_accents_lower_g" transform={gTransform}>
+            <g id="eye_accents_lower_g" class="eye_accents_g" transform={gTransform}>
               <path
                 d="m 124.23598,121.8412 c 2.17007,2.17007 6.32937,4.70182 15.00965,5.06349"
                 id="eye_accent_right_lower"
@@ -266,7 +268,7 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
 
         <div id="eye_accents_upper" style={{ transform: `translateZ(${zLayers.eye_accents_upper}px)` }}>
           <svg viewBox={viewBox}>
-            <g id="eye_accents_upper_g" transform={gTransform}>
+            <g id="eye_accents_upper_g" class="eye_accents_g" transform={gTransform}>
               <path
                 d="m 125.32151,119.71549 c 0,0 4.34014,4.34014 7.77608,4.70182"
                 id="eye_accent_right_upper"
@@ -294,20 +296,34 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
           </svg>
         </div>
 
-        <div id="head_accents" style={{ transform: `translateZ(${zLayers.head_accents}px)` }}>
+        <div id="head_accents_upper" style={{ transform: `translateZ(${zLayers.head_accents_upper}px)` }}>
           <svg viewBox={viewBox}>
-            <g id="head_accents_g" transform={gTransform}>
+            <g id="head_accents_upper_g" class="head_accents_g" transform={gTransform}>
               <path
-                d="m 73.026301,75.979572 c 0,0 41.614249,-8.322852 66.045849,0"
-                id="forehead_lower_accent"
+                d="m 89.672003,58.259953 c 0,0 12.618517,-2.684788 31.412047,-0.268478"
+                id="forehead_upper_accent"
               />
+            </g>
+          </svg>
+        </div>
+
+        <div id="head_accents_middle" style={{ transform: `translateZ(${zLayers.head_accents_middle}px)` }}>
+          <svg viewBox={viewBox}>
+            <g id="head_accents_middle_g" class="head_accents_g" transform={gTransform}>
               <path
                 d="m 78.664363,67.119764 c 0,0 26.042467,-5.101103 55.038207,0"
                 id="forehead_middle_accent"
               />
+            </g>
+          </svg>
+        </div>
+
+        <div id="head_accents_lower" style={{ transform: `translateZ(${zLayers.head_accents_lower}px)` }}>
+          <svg viewBox={viewBox}>
+            <g id="head_accents_lower_g" class="head_accents_g" transform={gTransform}>
               <path
-                d="m 89.672003,58.259953 c 0,0 12.618517,-2.684788 31.412047,-0.268478"
-                id="forehead_upper_accent"
+                d="m 73.026301,75.979572 c 0,0 41.614249,-8.322852 66.045849,0"
+                id="forehead_lower_accent"
               />
             </g>
           </svg>
