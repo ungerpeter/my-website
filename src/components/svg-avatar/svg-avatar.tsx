@@ -1,16 +1,10 @@
 import {
   component$,
-  noSerialize,
   useSignal,
   useVisibleTask$,
-  type NoSerialize,
 } from "@builder.io/qwik";
 import { css } from "~/styled-system/css";
-import { center, grid } from "~/styled-system/patterns";
-import {
-  addDeviceMotionListener,
-  addDeviceOrientationListener,
-} from "~/utils/device-orientation";
+import { center } from "~/styled-system/patterns";
 
 export interface SvgAvatarProps {}
 
@@ -19,26 +13,16 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
   const eyesSvgRef = useSignal<SVGSVGElement>();
   const pupilsRef = useSignal<SVGGElement>();
   const animate = useSignal(false);
-  const deviceOrientation = useSignal<NoSerialize<DeviceOrientationEvent>>();
-  const deviceMotion = useSignal<NoSerialize<DeviceMotionEvent>>();
 
   const pupilsMaxTranslateX = 3.2;
   const pupilsMaxTranslateY = 2.3;
   const headMaxTiltDeg = 15;
-
+  
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(() => {
     animate.value = true;
     const eyeFollowAnimation = true;
     const headFollowAnimation = true;
-
-    addDeviceOrientationListener((event) => {
-      deviceOrientation.value = noSerialize(event);
-    });
-
-    addDeviceMotionListener((event) => {
-      deviceMotion.value = noSerialize(event);
-    });
 
     if (eyeFollowAnimation) {
       window.addEventListener("mousemove", (event) => {
@@ -117,58 +101,8 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
     nose_center: 60,
   };
 
-  console.log("deviceOrientation", deviceOrientation.value);
-
   return (
     <div class={center({ perspective: "1000px", flexDir: "column" })}>
-      <div>
-        <h2>DEBUG</h2>
-        <div class={grid({ gap: "1rem", gridTemplateColumns: '1fr', md: { gridTemplateColumns: '1fr 1fr' } })}>
-          <div
-            class={css({
-              display: "grid",
-              gridTemplateColumns: "auto 200px",
-              gap: "0.25rem 1rem",
-              width: "fill-available",
-            })}
-          >
-            <span>o a</span>
-            <span>{deviceOrientation.value?.alpha}</span>
-            <span>o b</span>
-            <span>{deviceOrientation.value?.beta}</span>
-            <span>o c</span>
-            <span>{deviceOrientation.value?.gamma}</span>
-          </div>
-          <div
-            class={css({
-              marginBottom: "1rem",
-              display: "grid",
-              gridTemplateColumns: "auto 200px",
-              gap: "0.25rem 1rem",
-            })}
-          >
-            <span>m ax</span>
-            <span>{deviceMotion.value?.acceleration?.x}</span>
-            <span>m ay</span>
-            <span>{deviceMotion.value?.acceleration?.y}</span>
-            <span>m az</span>
-            <span>{deviceMotion.value?.acceleration?.z}</span>
-            <span>m gx</span>
-            <span>{deviceMotion.value?.accelerationIncludingGravity?.x}</span>
-            <span>m gy</span>
-            <span>{deviceMotion.value?.accelerationIncludingGravity?.y}</span>
-            <span>m gz</span>
-            <span>{deviceMotion.value?.accelerationIncludingGravity?.z}</span>
-            <span>m ra</span>
-            <span>{deviceMotion.value?.rotationRate?.alpha}</span>
-            <span>m rb</span>
-            <span>{deviceMotion.value?.rotationRate?.beta}</span>
-            <span>m rg</span>
-            <span>{deviceMotion.value?.rotationRate?.gamma}</span>
-          </div>
-          <br />
-        </div>
-      </div>
       <div
         id="avatar"
         ref={avatarRef}
