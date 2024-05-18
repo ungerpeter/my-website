@@ -14,6 +14,7 @@ import {
 import styles from "./styles.css?inline";
 import { NavLink } from "~/components/nav-link/nav-link";
 import { css } from "~/styled-system/css";
+import { container } from "~/styled-system/patterns";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -148,7 +149,7 @@ export default component$(() => {
           },
         })}
       >
-        <div class="container">
+        <div class={container({})}>
           <Slot />
         </div>
       </main>
