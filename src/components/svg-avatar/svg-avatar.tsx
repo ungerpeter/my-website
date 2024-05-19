@@ -120,16 +120,52 @@ export const SvgAvatar = component$<SvgAvatarProps>(() => {
             width: "100%",
             maxWidth: "250px",
             height: "auto",
-            stroke: "#fff",
+            stroke: "#666",
             strokeWidth: 0.5,
+            fillOpacity: 0,
+            "& #head_g": {
+              fillOpacity: 1,
+              fill: "#ffccb7",
+            },
+            "& #ears_g": {
+              fillOpacity: 1,
+              fill: "#ffccb7",
+            },
+            "& #eyes_g": {
+              fillOpacity: 1,
+              fill: "#fff",
+            },
+            "& #pupils_g": {
+              fillOpacity: 1,
+              fill: "#361a01",
+            },
+            "& #chin_beard_g": {
+              fillOpacity: 1,
+              fill: "#1c0d00",
+            },
+            "& #mustache_beard_g": {
+              fillOpacity: 1,
+              fill: "#1c0d00",
+            },
+            "& #goat_beard_g": {
+              fillOpacity: 1,
+              fill: "#1c0d00",
+            },
             "& #glasses_g": {
               fillOpacity: 0.3,
               strokeWidth: 1.5,
-              stroke: "#999",
+              stroke: "#d6bc00",
+              fill: "#fff",
+            },
+            "& #eyebrows_g": {
+              fillOpacity: 1,
+              fill: "#1c0d00",
             },
             "& #lips_g": {
               strokeWidth: 0.3,
               stroke: "#999",
+              fill: "rgb(178 94 72 / 17%)",
+              fillOpacity: 1,
             },
             "& .eye_accents_g": {
               strokeWidth: 0.3,
