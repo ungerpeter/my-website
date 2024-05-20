@@ -48,7 +48,7 @@ export default component$(() => {
             })}
           >
             <TextAnimation
-              text="I enjoy programming and thinking outside of the box."
+              text="I enjoy programming and thinking outside of the 📦."
               animation={"reveal-ltr"}
               padding="0 0.5rem"
               delay={"3000ms"}
@@ -62,11 +62,17 @@ export default component$(() => {
           })}
         >
           <div
-            class={css({
-              border: "1px solid var(--border-color)",
-              borderRadius: "var(--border-radius)",
-              padding: "1rem 2rem",
-            })}
+            data-poi="true"
+            class={[
+              css({
+                border: "1px solid var(--border-color)",
+                borderRadius: "var(--border-radius)",
+                padding: "1rem 2rem",
+                _hover: {
+                  color: "blue",
+                }
+              })
+            ]}
           >
             Let's chat
           </div>

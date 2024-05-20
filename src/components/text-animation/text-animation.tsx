@@ -24,12 +24,12 @@ export const TextAnimation = component$<TextAnimationProps>((props) => {
     }
   });
 
+  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(() => {
     if (!spanRef.value) {
       return;
     }
     const textWidth = spanRef.value.clientWidth;
-    console.log(spanRef.value);
     spanRef.value.style.setProperty("--text-width", `${textWidth}px`);
     spanRef.value.style.setProperty("--padding", props.padding || "0.5rem");
     spanRef.value.style.setProperty("--delay", props.delay || "0");
