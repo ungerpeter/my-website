@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { NavLink } from "~/components/nav-link/nav-link";
 import { SvgAvatar } from "~/components/svg-avatar/svg-avatar";
+import { TextAnimation } from "~/components/text-animation/text-animation";
 import { css } from "~/styled-system/css";
 import { container } from "~/styled-system/patterns";
 
@@ -32,14 +33,26 @@ export default component$(() => {
               fontSize: "max(5vw, 2rem) !important",
             })}
           >
-            Hi, my name is Peter 👋
+            Hi,
+            <TextAnimation
+              text="my name is Peter"
+              animation={"reveal-ltr"}
+              padding="0 0.5rem"
+              delay={"1000ms"}
+            />
+            👋
           </h1>
           <h2
             class={css({
               fontSize: "max(2vw, 1.25rem) !important",
             })}
           >
-            I enjoy programming and thinking outside of the box.
+            <TextAnimation
+              text="I enjoy programming and thinking outside of the box."
+              animation={"reveal-ltr"}
+              padding="0 0.5rem"
+              delay={"3000ms"}
+            />
           </h2>
         </div>
         <SvgAvatar />

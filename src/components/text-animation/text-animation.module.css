@@ -1,0 +1,40 @@
+:root {
+	--delay: 1000ms;
+	--duration: 800ms;
+  --margin: "1rem";
+}
+
+.reveal-ltr {
+  width: auto;
+  display: inline-flex;
+  text-wrap: nowrap;
+  animation-delay: var(--delay, 0);
+	animation-duration: var(--duration, 800ms);
+	animation-fill-mode: both;
+	animation-timing-function: ease-out;
+  padding: var(--padding, 0);
+  box-sizing: content-box;
+
+  & span {
+    overflow: hidden;
+  }
+}
+
+.reveal-ltr.active {
+  animation-name: clip-text;
+}
+
+@keyframes clip-text {
+	from {
+		/* clip-path: inset(0 100% 0 0); */
+    width: 0;
+    padding: 0;
+	}
+  0% {
+    padding: var(--padding, 0);
+  }
+	to {
+		/* clip-path: inset(0 0 0 0); */
+    width: var(--text-width, auto);
+	}
+}
